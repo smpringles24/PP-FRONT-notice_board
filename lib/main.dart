@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pp_front_notice_board/home/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,18 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Home(),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Project Start!'),
+      home: HomeScreen(),
     );
   }
 }
