@@ -11,29 +11,53 @@ class HomeScreen extends StatelessWidget {
         title: const Text('SM Notice Board'),
         backgroundColor: Colors.pink,
       ),
-      body: const Column(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Expanded(
               child: Column(
                 children: [
-                  SizedBox(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          _ListviewTile(),
-                          Divider(),
-                          _ListviewTile(),
-                          _ListviewTile(),
-                          _ListviewTile(),
-                          _ListviewTile(),
-                          _ListviewTile(),
-                        ]),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          padding: const EdgeInsets.all(3),
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(Icons.note_alt),
+                              Text('글쓰기'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 20),
-                  SizedBox(
+                  const SizedBox(height: 15),
+                  const SizedBox(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _ListviewTile(),
+                        Divider(),
+                        _ListviewTile(),
+                        _ListviewTile(),
+                        _ListviewTile(),
+                        _ListviewTile(),
+                        _ListviewTile(),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const SizedBox(
                     child: Text('1 2 3 4 5 6 7 8 9 10'),
                   ),
                 ],
