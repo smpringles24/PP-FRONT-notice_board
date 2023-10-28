@@ -117,11 +117,23 @@ class _ListviewTile extends StatelessWidget {
         ),
         Expanded(
           flex: 50,
-          child: TextButton(
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ArticlePage())),
-            child: Text(noticeBoardModel?.title?.toString() ?? '제목'),
-          ),
+          child: noticeBoardModel != null
+              ? TextButton(
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ArticlePage())),
+                  child: Text(noticeBoardModel?.title?.toString() ?? '제목'),
+                )
+              : const Center(child: Text('제목')),
+        ),
+        const Expanded(
+          flex: 25,
+          child: Text('작성자'),
+        ),
+        const Expanded(
+          flex: 15,
+          child: Text('조회수'),
         ),
         Expanded(
           flex: 20,
