@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:pp_front_notice_board/data/notice_board_model.dart';
+import 'package:pp_front_notice_board/ui/notice_board/notice_board_view_model.dart';
+import 'package:provider/provider.dart';
 
 class NoticeBoardView extends StatelessWidget {
   const NoticeBoardView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    NoticeBoardViewModel noticeBoardViewModel =
+        Provider.of<NoticeBoardViewModel>(context);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -46,15 +52,17 @@ class NoticeBoardView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const _ListviewTile(),
+                        _ListviewTile(null),
                         const Divider(),
                         Expanded(
                           child: ListView.separated(
-                            itemCount: 10,
+                            itemCount: noticeBoardViewModel.noticeBoards.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return const _ListviewTile();
+                              return _ListviewTile(
+                                  noticeBoardViewModel.noticeBoards[index]);
                             },
-                            separatorBuilder: (BuildContext context, int index) {
+                            separatorBuilder:
+                                (BuildContext context, int index) {
                               return const SizedBox(height: 10);
                             },
                           ),
@@ -87,32 +95,26 @@ class NoticeBoardView extends StatelessWidget {
 }
 
 class _ListviewTile extends StatelessWidget {
-  const _ListviewTile();
+  NoticeBoardModel? noticeBoardModel;
+
+  _ListviewTile(this.noticeBoardModel);
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 5),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(children: [
         Expanded(
           flex: 10,
-          child: Text('NO.'),
+          child: Text(noticeBoardModel?.id?.toString() ?? 'NO.'),
         ),
         Expanded(
           flex: 50,
-          child: Text('제목'),
-        ),
-        Expanded(
-          flex: 10,
-          child: Text('글쓴이'),
+          child: Text(noticeBoardModel?.title?.toString() ?? '제목'),
         ),
         Expanded(
           flex: 20,
-          child: Text('작성시간'),
-        ),
-        Expanded(
-          flex: 10,
-          child: Text('조회수'),
+          child: Text(noticeBoardModel?.createdAt?.toString() ?? '작성시간'),
         ),
       ]),
     );
