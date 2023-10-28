@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class NoticeBoardView extends StatelessWidget {
+  const NoticeBoardView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,9 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-            child: Expanded(
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Column(
                 children: [
                   Row(
@@ -42,17 +42,23 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 15),
-                  const SizedBox(
+                  Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _ListviewTile(),
-                        Divider(),
-                        _ListviewTile(),
-                        _ListviewTile(),
-                        _ListviewTile(),
-                        _ListviewTile(),
-                        _ListviewTile(),
+                        const _ListviewTile(),
+                        const Divider(),
+                        Expanded(
+                          child: ListView.separated(
+                            itemCount: 10,
+                            itemBuilder: (BuildContext context, int index) {
+                              return const _ListviewTile();
+                            },
+                            separatorBuilder: (BuildContext context, int index) {
+                              return const SizedBox(height: 10);
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),
