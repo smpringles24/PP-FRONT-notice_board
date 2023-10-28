@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pp_front_notice_board/data/notice_board_model.dart';
+import 'package:pp_front_notice_board/ui/article/article_page.dart';
 import 'package:pp_front_notice_board/ui/notice_board/notice_board_view_model.dart';
+import 'package:pp_front_notice_board/ui/writing/writing_page.dart';
 import 'package:provider/provider.dart';
 
 class NoticeBoardView extends StatelessWidget {
@@ -29,7 +31,12 @@ class NoticeBoardView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const WritingPage()));
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
@@ -52,7 +59,7 @@ class NoticeBoardView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _ListviewTile(null),
+                        const _ListviewTile(null),
                         const Divider(),
                         Expanded(
                           child: ListView.separated(
@@ -95,9 +102,9 @@ class NoticeBoardView extends StatelessWidget {
 }
 
 class _ListviewTile extends StatelessWidget {
-  NoticeBoardModel? noticeBoardModel;
+  final NoticeBoardModel? noticeBoardModel;
 
-  _ListviewTile(this.noticeBoardModel);
+  const _ListviewTile(this.noticeBoardModel);
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +117,11 @@ class _ListviewTile extends StatelessWidget {
         ),
         Expanded(
           flex: 50,
-          child: Text(noticeBoardModel?.title?.toString() ?? '제목'),
+          child: TextButton(
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ArticlePage())),
+            child: Text(noticeBoardModel?.title?.toString() ?? '제목'),
+          ),
         ),
         Expanded(
           flex: 20,
