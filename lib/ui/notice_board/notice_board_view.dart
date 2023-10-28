@@ -5,6 +5,15 @@ import 'package:pp_front_notice_board/ui/notice_board/notice_board_view_model.da
 import 'package:pp_front_notice_board/ui/writing/writing_page.dart';
 import 'package:provider/provider.dart';
 
+String? _formatDate(String? isoDateString) {
+  if (isoDateString != null) {
+    DateTime dateTime = DateTime.parse(isoDateString);
+    return "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
+  } else {
+    return null;
+  }
+}
+
 class NoticeBoardView extends StatelessWidget {
   const NoticeBoardView({super.key});
 
@@ -113,7 +122,7 @@ class _ListviewTile extends StatelessWidget {
       child: Row(children: [
         Expanded(
           flex: 10,
-          child: Text(noticeBoardModel?.id?.toString() ?? 'NO.'),
+          child: Center(child: Text(noticeBoardModel?.id?.toString() ?? 'NO.')),
         ),
         Expanded(
           flex: 50,
@@ -123,21 +132,21 @@ class _ListviewTile extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const ArticlePage())),
-                  child: Text(noticeBoardModel?.title?.toString() ?? '제목'),
+                  child: Text(noticeBoardModel?.title ?? '제목'),
                 )
               : const Center(child: Text('제목')),
         ),
-        const Expanded(
+        Expanded(
           flex: 25,
-          child: Text('작성자'),
+          child: Center(child: Text(noticeBoardModel?.writer ?? '작성자')),
         ),
-        const Expanded(
+        Expanded(
           flex: 15,
-          child: Text('조회수'),
+          child: Center(child: Text(noticeBoardModel?.view?.toString() ?? '조회수')),
         ),
         Expanded(
           flex: 20,
-          child: Text(noticeBoardModel?.createdAt?.toString() ?? '작성시간'),
+          child: Center(child: Text(_formatDate(noticeBoardModel?.createdAt) ?? '작성시간')),
         ),
       ]),
     );
